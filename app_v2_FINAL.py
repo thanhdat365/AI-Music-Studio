@@ -1,7 +1,6 @@
 import streamlit as st
 from gtts import gTTS
 import os
-from pydub import AudioSegment
 import io
 import google.generativeai as genai
 
@@ -104,27 +103,15 @@ Van ban:"""
                             tts.write_to_fp(audio_buffer)
                             audio_buffer.seek(0)
                             
-                            try:
-                                audio = AudioSegment.from_file(audio_buffer, format="mp3")
-                                wav_buffer = io.BytesIO()
-                                audio.export(wav_buffer, format="wav")
-                                wav_buffer.seek(0)
-                            except:
-                                wav_buffer = audio_buffer
                             
                             st.success("✅ Tao am thanh thanh cong!")
                             st.markdown("### 🎧 NGHE BAI HAT")
                             audio_buffer.seek(0)
                             st.audio(audio_buffer, format="audio/mp3")
                             
-                            col1, col2 = st.columns(2)
-                            with col1:
-                                audio_buffer.seek(0)
-                                st.download_button(label="📥 Tai MP3", data=audio_buffer, file_name=f"{song_title}.mp3", mime="audio/mpeg", use_container_width=True)
+                            audio_buffer.seek(0)
+                            st.download_button(label="📥 Tai MP3", data=audio_buffer, file_name=f"{song_title}.mp3", mime="audio/mpeg", use_container_width=True)
                             
-                            with col2:
-                                wav_buffer.seek(0)
-                                st.download_button(label="📥 Tai WAV", data=wav_buffer, file_name=f"{song_title}.wav", mime="audio/wav", use_container_width=True)
                         except Exception as e:
                             st.error(f"❌ Loi tao am thanh: {str(e)}")
                 
@@ -158,27 +145,13 @@ with tab2:
                     tts.write_to_fp(audio_buffer)
                     audio_buffer.seek(0)
                     
-                    try:
-                        audio = AudioSegment.from_file(audio_buffer, format="mp3")
-                        wav_buffer = io.BytesIO()
-                        audio.export(wav_buffer, format="wav")
-                        wav_buffer.seek(0)
-                    except:
-                        wav_buffer = audio_buffer
                     
                     st.success("✅ Tao thanh cong!")
                     st.markdown("### 🎧 NGHE BAI HAT")
                     audio_buffer.seek(0)
                     st.audio(audio_buffer, format="audio/mp3")
-                    
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        audio_buffer.seek(0)
-                        st.download_button(label="📥 Tai MP3", data=audio_buffer, file_name="music.mp3", mime="audio/mpeg", use_container_width=True)
-                    
-                    with col2:
-                        wav_buffer.seek(0)
-                        st.download_button(label="📥 Tai WAV", data=wav_buffer, file_name="music.wav", mime="audio/wav", use_container_width=True)
+                    audio_buffer.seek(0)
+                    st.download_button(label="📥 Tai MP3", data=audio_buffer, file_name="music.mp3", mime="audio/mpeg", use_container_width=True)
                     
                 except Exception as e:
                     st.error(f"❌ Loi: {str(e)}")
