@@ -165,3 +165,5 @@ st.markdown("""
     <p>© 2025 Nha Quang Ba Toan Nang - bigsell.com.vn</p>
 </div>
 """, unsafe_allow_html=True)
+
+# Version with Music Genre, Emotion, Gemini-1.5-flash support
